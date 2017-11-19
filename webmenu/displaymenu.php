@@ -24,17 +24,22 @@ while(! feof($handle))
 	
 		// Figure out what kind of line we're looking at
 		switch ($words[0]) {
-			case "#";
+			case "#"; // H1 header
 				$new_line["tag"] = "h1";
 				break;
-			case "##";
+			case "##"; // H2 header
 				$new_line["tag"] = "h2";
 				break;
-			case "---";
+			case "---"; // Column break
 				$new_line["tag"] = "div";
 				break;
 			default;
-				$new_line["tag"] = "p";
+				// Check for an image
+				if (strpos($words[0], ".jpg") !== false || strpos($words[0], ".png") !== false) {
+					$new_line["tag"] = "img";
+					} else {
+					$new_line["tag"] = "p";
+					}
 			} // end switch
 	
 		// Set the opening tag and the rest of the line
@@ -46,6 +51,9 @@ while(! feof($handle))
 				$new_line["content"] = "</div>
 
 <div class=\"section\">";
+				break;
+			case "img";
+				$new_line["content"] = $line;
 				break;
 			default;
 				$trim_line = ltrim(rtrim(strstr($line, " ")));
@@ -87,8 +95,9 @@ $display_footer = "</div>
 // Write the website menu file
 $web_menu = "";
 foreach ( $menu_body as $menu_item ) {
-	// Omit the div
-	if ($menu_item["tag"] <> "div") {
+	// Omit the div and img
+	$skip_tags = array("div", "img");
+	if ( ! in_array( $menu_item["tag"], $skip_tags) ) {
 		$web_menu .= "\t<".$menu_item["tag"].">";
 		$web_menu .= $menu_item["content"];
 		$web_menu .= "</".$menu_item["tag"].">";
@@ -104,13 +113,26 @@ fclose($handle);
 $display_menu = "";
 $display_menu .= $display_header;
 foreach ( $menu_body as $menu_item ) {
-	if ($menu_item["tag"] <> "div") {
-		$display_menu .= "\t<".$menu_item["tag"].">";
-		}
+	
+	switch ($menu_item["tag"]) {
+		case "div"; // do nothing
+			break;
+		case "img";
+			$display_menu .= "\t" . '<img src="';
+			break;
+		default;
+			$display_menu .= "\t<".$menu_item["tag"].">";
+	}
 	$display_menu .= $menu_item["content"];
-	if ($menu_item["tag"] <> "div") {
-		$display_menu .= "</".$menu_item["tag"].">";
-		}
+	switch ($menu_item["tag"]) {
+		case "div"; // do nothing
+			break;
+		case "img";
+			$display_menu .= '">';
+			break;
+		default;
+			$display_menu .= "</".$menu_item["tag"].">";
+	}
 	$display_menu .= "\n";
 }
 $display_menu .= $display_footer;

@@ -1,0 +1,126 @@
+	/* http://meyerweb.com/eric/tools/css/reset/ 
+	   v2.0 | 20110126
+	   License: none (public domain)
+	*/
+
+	html, body, div, span, applet, object, iframe,
+	h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+	a, abbr, acronym, address, big, cite, code,
+	del, dfn, em, img, ins, kbd, q, s, samp,
+	small, strike, strong, sub, sup, tt, var,
+	b, u, i, center,
+	dl, dt, dd, ol, ul, li,
+	fieldset, form, label, legend,
+	table, caption, tbody, tfoot, thead, tr, th, td,
+	article, aside, canvas, details, embed, 
+	figure, figcaption, footer, header, hgroup, 
+	menu, nav, output, ruby, section, summary,
+	time, mark, audio, video {
+		margin: 0;
+		padding: 0;
+		border: 0;
+		font-size: 100%;
+		font: inherit;
+		vertical-align: baseline;
+	}
+	/* HTML5 display-role reset for older browsers */
+	article, aside, details, figcaption, figure, 
+	footer, header, hgroup, menu, nav, section {
+		display: block;
+	}
+	body {
+		line-height: 1;
+	}
+	ol, ul {
+		list-style: none;
+	}
+	blockquote, q {
+		quotes: none;
+	}
+	blockquote:before, blockquote:after,
+	q:before, q:after {
+		content: '';
+		content: none;
+	}
+	table {
+		border-collapse: collapse;
+		border-spacing: 0;
+	}	
+	
+/* Start of Raduno styles */
+body {
+	font-family: 'Mada', sans-serif;
+	font-size: 32px;
+	}
+	
+#header {
+	width: 1920px;
+	height: 125px;
+	background-image: url("weblogo2.svg");
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-color: #E01600;
+	color: #F7F7D2;
+	font-family: 'Vampiro One', serif;
+	font-size: 70px;
+	}
+#hleft {
+	padding: 0px;
+	padding-top: 27px;
+	padding-right: 200px;
+	margin: 0px;
+	width: 760px;
+	float: left;
+	text-align: center;
+	}
+#hright {
+	padding: 0px;
+	padding-top: 27px;
+	padding-left: 200px;
+	margin: 0px;
+	margin-left: 960px;
+	text-align: center;
+	}
+	
+#footer {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	width: 1920px;
+	height: 75px;
+	background-color: #E01600;
+	background-image: url("webtag.svg");
+	background-repeat: no-repeat;
+	background-position: center center;
+	}
+#menu_container {
+	display: flex;
+	}
+.section {
+	flex: 1;
+	margin: 5px;
+	padding: 10px;
+	}
+#sandwiches {
+	}
+#pastas {
+	}
+#other {
+	}
+h1 {
+	font-size: 180%;
+	font-weight: bold;
+	color: #E01600;
+	}
+h2 {
+	font-weight: bold;
+	font-size: 120%;
+	margin-top: .30em;
+	margin-bottom: 0.2em;
+	}
+p {
+	margin-bottom: 0.75em;
+	font-size: 100%;
+	padding-left: 0.25em;
+	}

@@ -6,3 +6,4 @@ webmenu/text_menu.txt
 *.svg
 webmenu/breakfast.txt
 webmenu/menu_archive/*.*
+*.ini

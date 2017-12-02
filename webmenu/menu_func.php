@@ -65,15 +65,16 @@ function load_menu($fhandle) {
 
 function archive_menu($m_file, $m_type) {
 
-	function archive_filter($str) {
-		global $m_type;
-		return (substr($str, 0, strpos($str, "_")) == $m_type);
-	}
 	// Get contents of the archive directory
 	$arc_dir = scandir('menu_archive/');
-
+	
 	// Subset to the menu type (regular or breakfast) we're dealing with
-	$m_files = array_filter($arc_dir, "archive_filter");
+	$m_files = array();
+	foreach ($arc_dir as $k => $v) {
+		if ( substr($v, 0, strpos($v, "_")) == $m_type ) {
+			$m_files[$k] = $v;
+		}
+	}
 
 	// Sort and take the last (most recent) file
 	asort($m_files);

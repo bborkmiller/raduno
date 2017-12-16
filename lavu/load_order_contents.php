@@ -19,7 +19,8 @@ try {
 	$db_handle->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 }
 catch(PDOException $e) {
-	echo $e->getMessage();
+	echo $e->getMessage() . "\r\n";
+	exit("** Unable to connect to the database **\r\n");
 }
 
 // Set up Lavu API parameters

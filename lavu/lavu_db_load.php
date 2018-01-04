@@ -53,7 +53,7 @@ function import_table ($table, $columns, $lav, $dbh, $delete=FALSE, $report=FALS
 		}
 	}
 	
-	if ($report) { echo "   -- Finished $table: " . count($arrData) . " rows --\r\n"; }
+	if ($report) { echo "   -- Loaded " . count($arrData) . " rows into $table --\r\n"; }
 	
 	return count($arrData);
 }

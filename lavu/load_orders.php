@@ -67,9 +67,10 @@ if ($r[0] > 0) {
 
 // ------------------------------------------------------
 // Fill the order table
-$keep_columns = array('id', 'order_id', 'opened', 'closed', 'subtotal', 'total', 'server',
-						 'server_id', 'cashier', 'cashier_id', 'guests', 'order_status',
-						 'reopened_datetime', 'reclosed_datetime', 'void', 'cash_paid', 'card_paid');
+$keep_columns = array('id', 'order_id', 'opened', 'closed', 'subtotal', 'tax', 'total',
+						'server', 'server_id', 'discount', 'cash_paid', 'card_paid',
+						'cashier', 'cashier_id', 'guests', 'order_status',
+						'reopened_datetime', 'reclosed_datetime', 'void');
 $lav_query['filt_col'] = 'opened';
 $lav_query['filt_min'] = $dteStart;
 $lav_query['filt_max'] = $dteEnd;

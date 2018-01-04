@@ -39,13 +39,20 @@ CREATE TABLE orders (
 	opened DATETIME,
 	closed datetime,
 	subtotal FLOAT,
+	tax FLOAT,
 	total FLOAT,
 	server VARCHAR(20),
 	server_id INT,
+	discount FLOAT,
+	cash_paid FLOAT,
+	card_paid FLOAT,
 	cashier VARCHAR(20),
 	cashier_id INT,
 	guests INT,
-	order_status VARCHAR(20)
+	order_status VARCHAR(20),
+	reopened_datetime DATETIME,
+	reclosed_datetime DATETIME,
+	void INT
 )
 	DEFAULT CHARACTER SET utf8mb4;
 
@@ -60,6 +67,11 @@ CREATE TABLE order_contents (
 	item VARCHAR(100),
 	price FLOAT,
 	quantity FLOAT,
+	subtotal FLOAT,
+	discount_amount FLOAT,
+	subtotal_with_mods FLOAT,
+	tax_amount FLOAT,
+	total_with_tax FLOAT,
 	item_id INT,
 	category_id INT
 )

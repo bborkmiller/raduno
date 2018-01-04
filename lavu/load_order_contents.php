@@ -33,7 +33,7 @@ $lav_query = array(
 );
 
 // Check for existing rows
-$row_check = $db_handle->prepare("SELECT COUNT(*) FROM orders;");
+$row_check = $db_handle->prepare("SELECT COUNT(*) FROM order_contents");
 $row_check->execute();
 $r = $row_check->fetch();
 if ($r[0] > 0) { 
@@ -55,7 +55,9 @@ if ($r[0] > 0) {
 
 // ------------------------------------------------------
 // Fill the order_contents table
-$keep_columns = array('id', 'order_id', 'item', 'price', 'quantity', 'item_id', 'category_id');
+$keep_columns = array('id', 'order_id', 'item', 'price', 'quantity', 'subtotal',
+					'discount_amount', 'subtotal_with_mods', 'tax_amount', 'total_with_tax',
+					'item_id', 'category_id');
 
 // Query the table in 1000 row increments
 $start = 0;

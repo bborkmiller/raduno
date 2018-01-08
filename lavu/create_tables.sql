@@ -52,7 +52,8 @@ CREATE TABLE orders (
 	order_status VARCHAR(20),
 	reopened_datetime DATETIME,
 	reclosed_datetime DATETIME,
-	void INT
+	void INT,
+	discount_id INT
 )
 	DEFAULT CHARACTER SET utf8mb4;
 
@@ -69,11 +70,14 @@ CREATE TABLE order_contents (
 	quantity FLOAT,
 	subtotal FLOAT,
 	discount_amount FLOAT,
+	discount_value FLOAT,
+	after_discount FLOAT,
 	subtotal_with_mods FLOAT,
 	tax_amount FLOAT,
 	total_with_tax FLOAT,
 	item_id INT,
-	category_id INT
+	category_id INT,
+	discount_id INT
 )
 	DEFAULT CHARACTER SET utf8mb4;
 	

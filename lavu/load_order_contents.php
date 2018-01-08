@@ -56,8 +56,8 @@ if ($r[0] > 0) {
 // ------------------------------------------------------
 // Fill the order_contents table
 $keep_columns = array('id', 'order_id', 'item', 'price', 'quantity', 'subtotal',
-					'discount_amount', 'subtotal_with_mods', 'tax_amount', 'total_with_tax',
-					'item_id', 'category_id');
+			'discount_amount', 'discount_value', 'after_discount', 'subtotal_with_mods',
+			'tax_amount', 'total_with_tax', 'item_id', 'category_id', 'discount_id');
 
 // Query the table in 1000 row increments
 $start = 0;

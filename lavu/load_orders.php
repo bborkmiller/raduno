@@ -70,7 +70,7 @@ if ($r[0] > 0) {
 $keep_columns = array('id', 'order_id', 'opened', 'closed', 'subtotal', 'tax', 'total',
 						'server', 'server_id', 'discount', 'cash_paid', 'card_paid',
 						'cashier', 'cashier_id', 'guests', 'order_status',
-						'reopened_datetime', 'reclosed_datetime', 'void');
+						'reopened_datetime', 'reclosed_datetime', 'void', 'discount_id');
 $lav_query['filt_col'] = 'opened';
 $lav_query['filt_min'] = $dteStart;
 $lav_query['filt_max'] = $dteEnd;

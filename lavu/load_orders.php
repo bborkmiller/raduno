@@ -11,17 +11,6 @@ date_default_timezone_set("America/Detroit");
 
 // POSLavu API Settings
 $lavu_config = parse_ini_file("lavu_config.ini");
-$dateTime = new DateTime (date("Y-m-d H:i:s")); // POSLavu API uses non-standard date formatting
-$dateTime->setTimezone(new DateTimeZone("America/Detroit")); // So, we need to generate a timestamp
-$tmeDate = $dateTime->getTimestamp();	 // to use for default processing
-
-// Make sure we have a start and end date if we don't have either - set it.
-// if(!isset($dteStart)) $dteStart=date('Y-m-01',strtotime('first day last month',$tmeDate));
-$dteStart = date('Y-m-d', strtotime("2017/08/01"));
-$dteEnd = date('Y-m-d', strtotime("2017/09/01"));
-// if(!isset($dteEnd)) $dteEnd=date("Y-m", strtotime('first day last month',$tmeDate)).'-'.date("t", strtotime('first day last month',$tmeDate));;
-
-// echo $dteStart . "\r\n" . $dteEnd . "\r\n";
 
 // Connect to database
 try {

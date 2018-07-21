@@ -16,45 +16,52 @@ function import_table ($table, $columns, $lav, $dbh, $delete=FALSE, $report=FALS
 	$lav['table'] = $table;
 	$arrData=xmlstr_to_array(plGetData($lav['config'], $lav['table'], $lav['filt_col'], $lav['file_val'], $lav['filt_min'], $lav['filt_max'], $lav['limit']));
 	$arrData=$arrData['row'];
-
-	// Subset the results
-	$columns = array_flip($columns);
-	array_walk($arrData, 'subset_array', $columns);
-
-	$col_names = array();
-	foreach($columns as $k => $v ) {
-		$col_names[':'.$k] = $k;
-		$columns[$k] = $k;
-	}
-
-	// clear the table
-	if ($delete) {
-		$sql = "DELETE FROM $table";
-		$dbh->exec($sql);
-		if ($report) { echo "   -- Deleted $table --\r\n"; }
-	}
-
-	// Insert the data
-	$stmt = "INSERT INTO $table (" .implode(', ', array_keys($columns)) .  ") VALUES (" . implode(', ', array_keys($col_names)) . ")";
-// 	if ($report) { echo $stmt . "\r\n"; }
-	$insert = $dbh->prepare($stmt);
+	print_r(count($arrData));
 	
-	// Handle weird dates (unclosed order)
-	if ( $table === 'orders' ) {
-		foreach ($arrData as $row) {
-			if ( $row['closed'] === '0000-00-00 00:00:00' ) { $row['closed'] = NULL; }
-			if ( $row['reopened_datetime'] === '0000-00-00 00:00:00' ) { $row['reopened_datetime'] = NULL; }
-			if ( $row['reclosed_datetime'] === '0000-00-00 00:00:00' ) { $row['reclosed_datetime'] = NULL; }
-			$insert->execute($row);
-		}
+	// Check for zero rows
+	if (count($arrData) === 0) {
+		// No rows
+		return 0;
 	} else {
-		foreach ($arrData as $row) {
-			$insert->execute($row);
+		// Subset the results
+		$columns = array_flip($columns);
+		array_walk($arrData, 'subset_array', $columns);
+
+		$col_names = array();
+		foreach($columns as $k => $v ) {
+			$col_names[':'.$k] = $k;
+			$columns[$k] = $k;
 		}
+
+		// clear the table
+		if ($delete) {
+			$sql = "DELETE FROM $table";
+			$dbh->exec($sql);
+			if ($report) { echo "   -- Deleted $table --\r\n"; }
+		}
+
+		// Insert the data
+		$stmt = "INSERT INTO $table (" .implode(', ', array_keys($columns)) .  ") VALUES (" . implode(', ', array_keys($col_names)) . ")";
+	// 	if ($report) { echo $stmt . "\r\n"; }
+		$insert = $dbh->prepare($stmt);
+	
+		// Handle weird dates (unclosed order)
+		if ( $table === 'orders' ) {
+			foreach ($arrData as $row) {
+				if ( $row['closed'] === '0000-00-00 00:00:00' ) { $row['closed'] = NULL; }
+				if ( $row['reopened_datetime'] === '0000-00-00 00:00:00' ) { $row['reopened_datetime'] = NULL; }
+				if ( $row['reclosed_datetime'] === '0000-00-00 00:00:00' ) { $row['reclosed_datetime'] = NULL; }
+				$insert->execute($row);
+			}
+		} else {
+			foreach ($arrData as $row) {
+				$insert->execute($row);
+			}
+		}
+	
+		if ($report) { echo "   -- Loaded " . count($arrData) . " rows into $table --\r\n"; }
+	
+		return count($arrData);
 	}
-	
-	if ($report) { echo "   -- Loaded " . count($arrData) . " rows into $table --\r\n"; }
-	
-	return count($arrData);
 }
 ?>

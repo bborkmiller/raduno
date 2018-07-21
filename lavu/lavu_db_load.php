@@ -16,7 +16,8 @@ function import_table ($table, $columns, $lav, $dbh, $delete=FALSE, $report=FALS
 	$lav['table'] = $table;
 	$arrData=xmlstr_to_array(plGetData($lav['config'], $lav['table'], $lav['filt_col'], $lav['file_val'], $lav['filt_min'], $lav['filt_max'], $lav['limit']));
 	$arrData=$arrData['row'];
-	print_r(count($arrData));
+	
+	//var_dump($arrData);
 	
 	// Check for zero rows
 	if (count($arrData) === 0) {
@@ -51,7 +52,10 @@ function import_table ($table, $columns, $lav, $dbh, $delete=FALSE, $report=FALS
 				if ( $row['closed'] === '0000-00-00 00:00:00' ) { $row['closed'] = NULL; }
 				if ( $row['reopened_datetime'] === '0000-00-00 00:00:00' ) { $row['reopened_datetime'] = NULL; }
 				if ( $row['reclosed_datetime'] === '0000-00-00 00:00:00' ) { $row['reclosed_datetime'] = NULL; }
-				$insert->execute($row);
+				try { $insert->execute($row); }
+				catch (PDOException $e) { 
+					var_dump($row);
+				}
 			}
 		} else {
 			foreach ($arrData as $row) {

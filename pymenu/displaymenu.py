@@ -23,7 +23,7 @@ menu_text = [line for line in menu_text if len(line) > 0]
 menu_code = []
 for line in menu_text:
     new_line = {}
-    
+
     # Check for an image
     if ".jpg" in line or ".png" in line:
         new_line["tag"] = "img"
@@ -56,10 +56,9 @@ for line in menu_text:
 ## Write out the web menu file to web_menu.html
 ## This is what people see at radunotc.com/menu/
 web_menu = ""
-skip_tags = {"div", "img"}
 for item in menu_code:
     # Omit the div and img
-    if item["tag"] not in skip_tags:
+    if item["tag"] not in {"div", "img"}:
         web_menu += f"\t<{item['tag']}>{item['text']}</{item['tag']}>"
     web_menu += "\n"
 
@@ -95,6 +94,6 @@ latest = sorted(archive_files)[-1]
 # Compare new file to most recent. If they don't match, then archive
 if filecmp.cmp("menu_archive/" + latest, menu_file) == False:
      curdt = datetime.datetime.now()
-     datetime = curdt.strftime("%Y%m%d-%H%M") #Ymd-Hi
+     datetime = curdt.strftime("%Y%m%d-%H%M")
      newfile = f"menu_archive/menu_{datetime}.txt"
      copyfile(menu_file, newfile)

@@ -7,3 +7,6 @@ webmenu/text_menu.txt
 webmenu/breakfast.txt
 webmenu/menu_archive/*.*
 *.ini
+pymenu/__pycache__/htmlstuff.cpython-37.pyc
+pymenu/menu_archive/
+pymenu/text_menu.txt

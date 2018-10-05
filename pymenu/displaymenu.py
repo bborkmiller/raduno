@@ -94,6 +94,6 @@ latest = sorted(archive_files)[-1]
 # Compare new file to most recent. If they don't match, then archive
 if filecmp.cmp("menu_archive/" + latest, menu_file) == False:
      curdt = datetime.datetime.now()
-     datetime = curdt.strftime("%Y%m%d-%H%M")
-     newfile = f"menu_archive/menu_{datetime}.txt"
+     file_date = datetime.datetime.now().strftime("%Y%m%d-%H%M")
+     newfile = f"menu_archive/menu_{file_date}.txt"
      copyfile(menu_file, newfile)
